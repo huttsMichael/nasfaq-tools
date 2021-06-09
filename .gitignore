@@ -127,3 +127,6 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# BEGIN REPO SPECIFIC IGNORES
+leaderboard.json
