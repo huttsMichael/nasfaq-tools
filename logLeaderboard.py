@@ -51,14 +51,14 @@ if __name__ == "__main__":
             retries = 0
         except requests.exceptions.ConnectionError:
             print("Request Failed:", sys.exc_info()[0])
-            time.sleep(5)
+            time.sleep(15)
             continue
         except:
             print("Other Failure:", sys.exc_info()[0])
             timestr = time.strftime("%Y%m%d-%H%M%S")
             with open("leaderboard.json", "r") as source, open(timestr + "_leaderboard.json", "w") as dest:
                 dest.write(source.read())
-            time.sleep(5)
+            time.sleep(15) # should probably sleep for longer than this, sorry honk
             retries -= 1
             print("Retries Remaining:", retries)
             continue

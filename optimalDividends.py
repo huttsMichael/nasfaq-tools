@@ -63,7 +63,7 @@ if __name__ == '__main__':
             div, price = getDividends()
             failed = False
         except:
-            time.sleep(5)
+            time.sleep(15)
             continue
 
     failed = True
@@ -76,7 +76,7 @@ if __name__ == '__main__':
             failed = False
         except:
             print("Failed... ", end='')
-            time.sleep(10)
+            time.sleep(15)
             print("Retrying")
             continue
     
