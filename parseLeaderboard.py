@@ -1,12 +1,9 @@
 import json
 import matplotlib
-import matplotlib.pyplot as plt
-import matplotlib.dates as mdate
 import datetime
-from logLeaderboard import getLeaderboard
-from shutil import copyfile
 import sys
-
+from shutil import copyfile
+from logLeaderboard import getLeaderboard
 
 TOP_USERS = False # graph multiple users
 GRAPH_POSITIONS = False # chart positions instead of balance
@@ -88,8 +85,8 @@ for date in leaderboard:
                     networth_list[index].append(leaderboard[date][position]['networth'])
         
 
-fig, ax = plt.subplots()
-plt.grid(color="#29282c")
+fig, ax = matplotlib.pyplot.subplots()
+matplotlib.pyplot.grid(color="#29282c")
 fig.patch.set_facecolor('#2e2d31')
 ax.patch.set_facecolor('#2e2d31')
 
@@ -118,14 +115,14 @@ for user in range(len(userid_list)):
 
 
 date_fmt = '%m/%d/%y %H:%M'
-date_formatter = mdate.DateFormatter(date_fmt)
+date_formatter = matplotlib.dates.DateFormatter(date_fmt)
 ax.xaxis.set_major_formatter(date_formatter)
-ax.xaxis.set_major_locator(mdate.DayLocator())
-ax.xaxis.set_minor_locator(mdate.HourLocator())
-plt.gca()
+ax.xaxis.set_major_locator(matplotlib.dates.DayLocator())
+ax.xaxis.set_minor_locator(matplotlib.dates.HourLocator())
+matplotlib.pyplot.gca()
 fig.autofmt_xdate()
 if TOP_USERS:
-    plt.legend(prop={'size':10})
+    matplotlib.pyplot.legend(prop={'size':10})
 if GRAPH_POSITIONS:
-    plt.gca().invert_yaxis()
-plt.show()
+    matplotlib.pyplot.gca().invert_yaxis()
+matplotlib.pyplot.show()
