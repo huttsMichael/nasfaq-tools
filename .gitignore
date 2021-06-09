@@ -128,5 +128,8 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
+# edtior files
+.vscode/
+
 # BEGIN REPO SPECIFIC IGNORES
-leaderboard.json
+*leaderboard.json

@@ -8,10 +8,12 @@ from shutil import copyfile
 import sys
 
 
-TOP_USERS = False
+TOP_USERS = False # graph multiple users
 GRAPH_POSITIONS = False # chart positions instead of balance
-USER_LOWER_RANGE = 35
-USER_UPPER_RANGE = 45
+USER_LOWER_RANGE = 0
+USER_UPPER_RANGE = 9
+USER_ID = ["ab69d48e-d029-4a5d-bf2d-f7544b3f3018"] # not me btw :^)
+
 for arg in range(len(sys.argv)):
     if sys.argv[arg] == '--users':
         TOP_USERS = True
@@ -20,7 +22,9 @@ for arg in range(len(sys.argv)):
     elif sys.argv[arg] == '--lower':
         USER_LOWER_RANGE = int(sys.argv[arg + 1])
     elif sys.argv[arg] == '--upper':
-        USER_UPPER_RANGE = int(sys.argv[arg + 1])    
+        USER_UPPER_RANGE = int(sys.argv[arg + 1])
+    elif sys.argv[arg] == '--id':
+        USER_ID.append(sys.argv[arg + 1])
 
 
 COLOR = "#666666"
@@ -30,6 +34,7 @@ matplotlib.rcParams['xtick.color'] = COLOR
 matplotlib.rcParams['ytick.color'] = COLOR
 matplotlib.rc('font', family='Arial')
 
+# create a copy of the leaderboard just incase 
 print("copying file")
 source_file = "leaderboard.json"
 dest_file = "bk_leaderboard.json"
@@ -56,9 +61,7 @@ if TOP_USERS:
         userid_list.append(moment_leaderboard[user_index]['userid'])
 
 else:
-    userid_list = ["8b7987fa-8649-40f7-99cb-5b97b1f4068a"]
-
-    #userid_list = ["8b7987fa-8649-40f7-99cb-5b97b1f4068a", "f6a1a05a-c60d-4d67-bd54-1405a96cc6e7"]
+    userid_list = USER_ID
 
 
 print("graph time")
