@@ -20,4 +20,4 @@ Plot the user(s) positions instead of their networth
 The userID to plot
 
 ### optimalDividends
-Just divide the current price by the most recent dividend price. Doesn't currently do anything with older dividends' data. 
+Just divide the current price by the most recent dividend price. Doesn't currently do anything with older dividends' data or most importantly factor in growth/numbers. 
