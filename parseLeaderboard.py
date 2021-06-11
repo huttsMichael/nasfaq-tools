@@ -1,5 +1,6 @@
 import json
 import matplotlib
+import matplotlib.pyplot
 import datetime
 import sys
 from shutil import copyfile
