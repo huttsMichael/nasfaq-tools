@@ -1,7 +1,7 @@
 import requests
 import json
 import time
-from datetime import datetime, timedelta
+from datetime import datetime
 
 WAIT_TIME = 15 # seconds
 
@@ -97,8 +97,6 @@ def sortRatios(unsortedRatios, descending=False):
 
 if __name__ == '__main__':
     divs = Dividends()
-    failed = False
-
     calc = calculateRatios(divs.currentDividends, divs.currentPrices)
     ratios = sortRatios(calc, descending=True)
     for holo in ratios:
