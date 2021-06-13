@@ -3,6 +3,8 @@ import json
 import time
 import sys
 
+MAX_RETRIES = 10
+
 def getLeaderboard():
     rawLeaderboard = requests.get("https://nasfaq.biz/api/getLeaderboard")
 
@@ -31,14 +33,14 @@ if __name__ == "__main__":
             f.truncate(size-1)          # truncate at that size - how ever many characters
         with open('leaderboard.json', 'a') as outfile:
             outfile.write(',')
-    retries = 10
+    retries = MAX_RETRIES
     while retries > 0:
         try:
             print(time.strftime("%H:%M:%S", time.localtime()), "retrieving leaderboard")
             getLeaderboard()
             print(time.strftime("%H:%M:%S", time.localtime()), "retrieved leaderboard")
             time.sleep(600)
-            retries = 5 # reset retry counter if it runs succesfully
+            retries = MAX_RETRIES # reset retry counter if it runs succesfully
         except KeyboardInterrupt:
             print("\nfixing")
             with open('leaderboard.json', 'rb+') as f:
