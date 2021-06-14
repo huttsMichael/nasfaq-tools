@@ -34,6 +34,7 @@ class Channels:
         for n in range(len(diffs)):
                 if diffs[n] != self.diffs[n]:
                     videoFound = True
+                    print("Change found with: ", self.data[n]['name'])
                     if diffs[n] < self.diffs[n]:
                         print("!!! UNPRIVATED VIDEO !!!")
                     elif diffs[n] > self.diffs[n]:
@@ -48,6 +49,9 @@ if __name__ == '__main__':
     ch = Channels()
     
     while True:
-        ch.check()
         time.sleep(CHECK_INTERVAL)
+        if ch.check():
+            print("CHANGES FOUND")
+        else:
+            print("no changes found")
     
