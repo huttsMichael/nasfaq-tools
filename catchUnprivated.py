@@ -1,22 +1,53 @@
-import requests
-import json
 import time
 from optimalDividends import getURL
+
+CHECK_INTERVAL = 900
 
 class Channels:
     def __init__(self) -> None:
         self.data = self.get()
+        self.diffs = self.analyze()
 
     def get(self):
         dataA = getURL("https://api.holotools.app/v1/channels?offset=0&limit=50")
         dataB = getURL("https://api.holotools.app/v1/channels?offset=50&limit=50")
         dataC = dataA.json()['channels']
-        dataC.append(dataB.json()['channels'])
+
+        for channel in dataB.json()['channels']:
+            dataC.append(channel)
+        
         return(dataC)
+    
+    def analyze(self):
+        diffs = []
+
+        for channel in self.data:
+            diffs.append(channel['video_original'] - channel['video_count'])
+
+        return(diffs)
+    
+    def check(self):
+        self.data = self.get()
+        diffs = self.analyze()
+
+        videoFound = False
+        for n in range(len(diffs)):
+                if diffs[n] != self.diffs[n]:
+                    videoFound = True
+                    if diffs[n] < self.diffs[n]:
+                        print("!!! UNPRIVATED VIDEO !!!")
+                    elif diffs[n] > self.diffs[n]:
+                        print("!!! PRIVATED VIDEO !!!")
+
+        self.diffs = diffs
+        return(videoFound)
+
 
     
 if __name__ == '__main__':
     ch = Channels()
-    ch.get()
-    for channel in ch.data:
-        print(channel)
+    
+    while True:
+        ch.check()
+        time.sleep(CHECK_INTERVAL)
+    
