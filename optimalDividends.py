@@ -16,12 +16,10 @@ class Dividends():
         for ts in self.histDividends:
             timestamp = int(ts)
             if timestamp > 10000000000: 
-                # timestamps had milliseconds added, divide those out if needed
-                timestamp /= 1000
+                timestamp /= 1000 # timestamps had milliseconds added, divide those out if needed
             lastTime = datetime.utcfromtimestamp(timestamp)
         
         diffTime = datetime.now() - lastTime
-        print(diffTime.days)
 
         if diffTime.days < 7: # no need to call getDividends if 
             return False
