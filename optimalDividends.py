@@ -75,7 +75,9 @@ def getURL(url):
             if resp.status_code == requests.codes.ok:
                 return resp
         except:
+            print('failed... ', end='')
             time.sleep(WAIT_TIME)
+            print('retrying')
 
 
 def calculateRatios(dividends, prices):
