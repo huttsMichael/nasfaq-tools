@@ -36,9 +36,9 @@ class Channels:
                     videoFound = True
                     print("Change found with: ", self.data[n]['name'])
                     if diffs[n] < self.diffs[n]:
-                        print("!!! UNPRIVATED VIDEO !!!")
+                        print("Change type: UNPRIVATED VIDEO")
                     elif diffs[n] > self.diffs[n]:
-                        print("!!! PRIVATED VIDEO !!!")
+                        print("Change type: PRIVATED VIDEO")
 
         self.diffs = diffs
         return(videoFound)
