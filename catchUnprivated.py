@@ -5,23 +5,33 @@ CHECK_INTERVAL = 60
 
 class Channels:
     def __init__(self) -> None:
-        self.data = self.get()
-        self.diffs, self.streams = self.analyze()
+        self.data, self.streams = self.get()
+        self.diffs = self.analyze()
+        self.status = self.live()
         self.uploads = self.count()
 
     def get(self):
         # get data of all channels' status 
-        statusA = getURL("https://api.holotools.app/v1/channels?offset=0&limit=50")
-        statusB = getURL("https://api.holotools.app/v1/channels?offset=50&limit=50")
-        status = statusA.json()['channels']
+        dataA = getURL("https://api.holotools.app/v1/channels?offset=0&limit=50")
+        dataB = getURL("https://api.holotools.app/v1/channels?offset=50&limit=50")
+        data = dataA.json()['channels']
 
-        for channel in statusB.json()['channels']:
-            status.append(channel)
+        for channel in dataB.json()['channels']:
+            data.append(channel)
 
         # get data of upcoming streams
-        streams = getURL("https://jetrico.sfo2.digitaloceanspaces.com/hololive/youtube.json")
+        streams = getURL("https://jetrico.sfo2.digitaloceanspaces.com/hololive/youtube.json").json()
         
-        return(status, streams)
+        return(data, streams)
+
+    def live(self):
+        status = [False] * len(self.diffs)
+        ongoing = self.streams['live']
+        for channelIndex in range(len(self.data)):
+            for stream in ongoing:
+                if self.data[channelIndex]['id'] == stream['channel']['id']:
+                    status[channelIndex] = True
+        return status
 
     def count(self):
         # currently redudant check, keep track of total uploaded videos so new videos don't count as unprivated videos
@@ -38,7 +48,7 @@ class Channels:
         for channel in self.data:
             diffs.append(channel['video_original'] - channel['video_count'])
 
-        return(self.correct(diffs))
+        return(diffs)
     
     def check(self):
         self.data = self.get()
@@ -47,7 +57,7 @@ class Channels:
 
         videoFound = False
         for n in range(len(diffs)):
-                if diffs[n] != self.diffs[n] and uploads[n] == self.uploads[n]:
+                if diffs[n] != self.diffs[n] and uploads[n] == self.uploads[n] and self.status[n] == False:
                     videoFound = True
                     print("Change found with: {}  ---  ({} vs {}, {} vs {})"
                         .format(self.data[n]['name'], diffs[n], self.diffs[n], uploads[n], self.uploads[n]))
