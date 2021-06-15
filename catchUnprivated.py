@@ -1,7 +1,7 @@
 import time
 from optimalDividends import getURL
 
-CHECK_INTERVAL = 60
+CHECK_INTERVAL = 900
 
 class Channels:
     def __init__(self) -> None:
@@ -51,7 +51,7 @@ class Channels:
         return(diffs)
     
     def check(self):
-        self.data = self.get()
+        self.data, self.streams = self.get()
         diffs = self.analyze()
         uploads = self.count()
 
