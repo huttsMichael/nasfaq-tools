@@ -22,7 +22,7 @@ for arg in range(len(sys.argv)):
     elif sys.argv[arg] == '--upper':
         USER_UPPER_RANGE = int(sys.argv[arg + 1])
     elif sys.argv[arg] == '--id':
-        USER_ID.append(sys.argv[arg + 1])
+        USER_ID = [sys.argv[arg + 1]]
 
 
 COLOR = "#666666"
