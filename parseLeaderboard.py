@@ -11,6 +11,7 @@ GRAPH_POSITIONS = False # chart positions instead of balance
 USER_LOWER_RANGE = 0
 USER_UPPER_RANGE = 9
 USER_ID = ["ab69d48e-d029-4a5d-bf2d-f7544b3f3018"] # not me btw :^)
+LEGEND = True
 
 for arg in range(len(sys.argv)):
     if sys.argv[arg] == '--users':
@@ -23,6 +24,8 @@ for arg in range(len(sys.argv)):
         USER_UPPER_RANGE = int(sys.argv[arg + 1])
     elif sys.argv[arg] == '--id':
         USER_ID = [sys.argv[arg + 1]]
+    elif sys.argv[arg] == '--no-legend':
+        LEGEND = False
 
 
 COLOR = "#666666"
@@ -122,7 +125,7 @@ ax.xaxis.set_major_locator(matplotlib.dates.DayLocator())
 ax.xaxis.set_minor_locator(matplotlib.dates.HourLocator())
 matplotlib.pyplot.gca()
 fig.autofmt_xdate()
-if TOP_USERS:
+if LEGEND:
     matplotlib.pyplot.legend(prop={'size':10})
 if GRAPH_POSITIONS:
     matplotlib.pyplot.gca().invert_yaxis()
