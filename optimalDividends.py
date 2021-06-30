@@ -21,7 +21,7 @@ class Dividends():
         
         diffTime = datetime.now() - lastTime
 
-        if diffTime.days < 7: # no need to call getDividends if 
+        if diffTime.days < 6: # no need to call getDividends if 
             return False
         else:
             return True
