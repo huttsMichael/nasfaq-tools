@@ -5,9 +5,13 @@ import sys
 
 MAX_RETRIES = 10
 SLEEP_TIME = 15 # seconds
+DEBUG = True
 
 def getLeaderboard():
-    rawLeaderboard = requests.get("https://nasfaq.biz/api/getLeaderboard")
+    if DEBUG:
+        print("sending request")
+    rawLeaderboard = requests.get("https://nasfaq.biz/api/getLeaderboard", timeout=30)
+    print("response received")
 
     timestamp = rawLeaderboard.json()['leaderboard']['timestamp']
     leaderboard = []
@@ -15,11 +19,13 @@ def getLeaderboard():
     for user in rawLeaderboard.json()['leaderboard']['leaderboard']:
         leaderboard.append(user)
     
+    print("writing to file")
     with open('leaderboard.json', 'a') as outfile:
         #json.dump(rawLeaderboard.json()['timestamp'], outfile)
         outfile.write('"'+str(timestamp)+'":')
         json.dump(rawLeaderboard.json()['leaderboard']['leaderboard'], outfile)
         outfile.write(',')
+    print("file written")
     
     return leaderboard
 
