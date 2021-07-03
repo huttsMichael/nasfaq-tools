@@ -4,6 +4,7 @@ import time
 from datetime import datetime
 
 WAIT_TIME = 15 # seconds
+ADJUSTMENT_INTERVAL = ((24 * 6 * 60) + (20 * 60)) * 60 # (mins in first 6 days of week + mins in last day) * secs
 
 class Dividends():
     def __init__(self, file = "dividends.json") -> None:
@@ -20,8 +21,10 @@ class Dividends():
             lastTime = datetime.utcfromtimestamp(timestamp)
         
         diffTime = datetime.now() - lastTime
+        diffTimeSeconds = (diffTime.days * 86400) + diffTime.seconds # days * seconds in day + extra seconds
+        print(ADJUSTMENT_INTERVAL, diffTimeSeconds, diffTime.days, diffTime.seconds)
 
-        if diffTime.days < 6: # no need to call getDividends if 
+        if diffTimeSeconds < ADJUSTMENT_INTERVAL: # no need to call getDividends if it's been too early
             return False
         else:
             return True
