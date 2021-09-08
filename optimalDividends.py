@@ -70,15 +70,18 @@ class Dividends():
 
         return dividends, prices
 
-def getURL(url):
+def getURL(url, session=""):
     success = False
     while not success:
         try:
-            resp = requests.get(url)
+            if session:
+                resp = requests.get(url, cookies=session)
+            else:
+                resp = requests.get(url)
             if resp.status_code == requests.codes.ok:
                 return resp
-        except:
-            print('failed... ', end='')
+        except Exception as e:
+            print('failed... ', e)
             time.sleep(WAIT_TIME)
             print('retrying')
 

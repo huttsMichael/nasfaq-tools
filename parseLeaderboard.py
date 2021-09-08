@@ -13,7 +13,7 @@ USER_UPPER_RANGE = 9
 USER_ID = ["ab69d48e-d029-4a5d-bf2d-f7544b3f3018"] # not me btw :^)
 LEGEND = True
 
-for arg in range(len(sys.argv)):
+for arg in range(len(sys.argv)):    # this should be switched to argparse eventually
     if sys.argv[arg] == '--users':
         TOP_USERS = True
     elif sys.argv[arg] == '--positions':
@@ -93,6 +93,7 @@ fig, ax = matplotlib.pyplot.subplots()
 matplotlib.pyplot.grid(color="#29282c")
 fig.patch.set_facecolor('#2e2d31')
 ax.patch.set_facecolor('#2e2d31')
+ax.set_yscale('log')
 
 for user in range(len(userid_list)):
     if not TOP_USERS:
