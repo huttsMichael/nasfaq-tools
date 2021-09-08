@@ -19,7 +19,7 @@ for arg in range(len(sys.argv)):
     elif sys.argv[arg] == '--positions':
         GRAPH_POSITIONS = True
     elif sys.argv[arg] == '--lower':
-        USER_LOWER_RANGE = int(sys.argv[arg + 1])
+        USER_LOWER_RANGE = int(sys.argv[arg + 1]) - 1
     elif sys.argv[arg] == '--upper':
         USER_UPPER_RANGE = int(sys.argv[arg + 1])
     elif sys.argv[arg] == '--id':
@@ -93,6 +93,7 @@ fig, ax = matplotlib.pyplot.subplots()
 matplotlib.pyplot.grid(color="#29282c")
 fig.patch.set_facecolor('#2e2d31')
 ax.patch.set_facecolor('#2e2d31')
+ax.set_yscale('log')
 
 for user in range(len(userid_list)):
     if not TOP_USERS:
