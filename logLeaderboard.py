@@ -10,7 +10,7 @@ DEBUG = True
 def getLeaderboard():
     if DEBUG:
         print("sending request")
-    rawLeaderboard = requests.get("https://nasfaq.biz/api/getLeaderboard", timeout=30)
+    rawLeaderboard = requests.get("https://nasfaq.biz/api/getLeaderboard?leaderboard&oshiboard", timeout=30)
     print("response received")
 
     timestamp = rawLeaderboard.json()['leaderboard']['timestamp']

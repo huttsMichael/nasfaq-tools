@@ -65,7 +65,7 @@ class Dividends():
                 dividends = self.histDividends[ts]
 
         print("Get prices")
-        rawPrices = getURL("https://nasfaq.biz/api/getMarketInfo")
+        rawPrices = getURL("https://nasfaq.biz/api/getMarketInfo?all&history")
         prices = rawPrices.json()['coinInfo']['data']
 
         return dividends, prices
