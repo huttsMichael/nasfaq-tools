@@ -21,3 +21,6 @@ The userID to plot
 
 ### optimalDividends
 Just divide the current price by the most recent dividend price. Doesn't currently do anything with older dividends' data or most importantly factor in growth/numbers. 
+
+### catchUnprivated
+Unfinished script for catching videos getting privated/unprivated using holotools' api. Would love for someone to get this working (probably with a rewrite)

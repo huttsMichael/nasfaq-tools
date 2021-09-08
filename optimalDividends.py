@@ -65,20 +65,23 @@ class Dividends():
                 dividends = self.histDividends[ts]
 
         print("Get prices")
-        rawPrices = getURL("https://nasfaq.biz/api/getMarketInfo")
+        rawPrices = getURL("https://nasfaq.biz/api/getMarketInfo?all&history")
         prices = rawPrices.json()['coinInfo']['data']
 
         return dividends, prices
 
-def getURL(url):
+def getURL(url, session=""):
     success = False
     while not success:
         try:
-            resp = requests.get(url)
+            if session:
+                resp = requests.get(url, cookies=session)
+            else:
+                resp = requests.get(url)
             if resp.status_code == requests.codes.ok:
                 return resp
-        except:
-            print('failed... ', end='')
+        except Exception as e:
+            print('failed... ', e)
             time.sleep(WAIT_TIME)
             print('retrying')
 

@@ -13,7 +13,7 @@ USER_UPPER_RANGE = 9
 USER_ID = ["ab69d48e-d029-4a5d-bf2d-f7544b3f3018"] # not me btw :^)
 LEGEND = True
 
-for arg in range(len(sys.argv)):
+for arg in range(len(sys.argv)):    # this should be switched to argparse eventually
     if sys.argv[arg] == '--users':
         TOP_USERS = True
     elif sys.argv[arg] == '--positions':
