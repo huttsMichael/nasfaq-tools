@@ -12,8 +12,6 @@ class Dividends():
         self.histDividends = self.load()
         self.updateDividends = self.__renew()
         self.currentDividends, self.currentPrices = self.get()
-        self.currentMembers = self.members()
-        self.histDates = self.dates()
         
     def __renew(self):
         for ts in self.histDividends:
@@ -30,9 +28,6 @@ class Dividends():
             return False
         else:
             return True
-
-    def __getTrends(self):
-        print(self.currentMembers)
     
     def load(self):
         with open("dividends.json") as divs:
@@ -138,6 +133,5 @@ if __name__ == '__main__':
     ratios = sortRatios(calc, descending=True)
     for holo in ratios:
         print(holo + ": " + "%.3f" % ratios[holo])
-    #divs.trends()
     
     
