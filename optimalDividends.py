@@ -12,6 +12,8 @@ class Dividends():
         self.histDividends = self.load()
         self.updateDividends = self.__renew()
         self.currentDividends, self.currentPrices = self.get()
+        self.histDates = self.dates()
+        self.currentMembers = self.members()
         
     def __renew(self):
         for ts in self.histDividends:
