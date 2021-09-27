@@ -91,7 +91,11 @@ class Dividends():
     def dates(self):
         allDates = []
         for date in self.histDividends:
-            allDates.append(date)
+            date = int(date)
+            if date > 10000000000: 
+                date /= 1000
+            allDates.append(datetime.fromtimestamp(int(date)))
+
         return allDates
 
     def trends(self):
