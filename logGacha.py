@@ -4,7 +4,7 @@ from optimalDividends import getURL
 
 class Gachaboard:
     def __init__(self) -> None:
-        self.session = {"holosesh": "TOKEN HERE"}
+        self.session = {"holosesh": "TOKEN HERE"} # you have to get this manually. 
         self.data = getURL("https://nasfaq.biz/api/getGachaboard", session=self.session)
     
     def display(self):
