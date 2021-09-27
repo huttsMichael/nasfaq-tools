@@ -19,7 +19,7 @@ for arg in range(len(sys.argv)):    # this should be switched to argparse eventu
     elif sys.argv[arg] == '--positions':
         GRAPH_POSITIONS = True
     elif sys.argv[arg] == '--lower':
-        USER_LOWER_RANGE = int(sys.argv[arg + 1])
+        USER_LOWER_RANGE = int(sys.argv[arg + 1]) - 1
     elif sys.argv[arg] == '--upper':
         USER_UPPER_RANGE = int(sys.argv[arg + 1])
     elif sys.argv[arg] == '--id':
