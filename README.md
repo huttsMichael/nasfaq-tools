@@ -24,3 +24,6 @@ Just divide the current price by the most recent dividend price. Doesn't current
 
 ### catchUnprivated
 Unfinished script for catching videos getting privated/unprivated using holotools' api. Would love for someone to get this working (probably with a rewrite)
+
+### logGatcha / nasfaqCommon
+Unfinished and probably dead part of project. Initially created as part rework of overall codebase, but current implimentation is working fine. I also think the API has been updated so this is less jank to do now.
