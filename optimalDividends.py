@@ -4,7 +4,7 @@ import time
 from datetime import datetime
 
 WAIT_TIME = 15 # seconds
-ADJUSTMENT_INTERVAL = ((24 * 6 * 60) + (20 * 60)) * 60 # (mins in first 6 days of week + mins in last day) * secs
+ADJUSTMENT_INTERVAL = ((24 * 6 * 60) + (20 * 60)) * 60 - 1000 # (mins in first 6 days of week + mins in last day) * secs
 
 class Dividends():
     def __init__(self, file = "dividends.json") -> None:
@@ -12,6 +12,8 @@ class Dividends():
         self.histDividends = self.load()
         self.updateDividends = self.__renew()
         self.currentDividends, self.currentPrices = self.get()
+        self.currentMembers = self.members()
+        self.histDates = self.dates()
         
     def __renew(self):
         for ts in self.histDividends:
@@ -28,6 +30,9 @@ class Dividends():
             return False
         else:
             return True
+
+    def __getTrends(self):
+        print(self.currentMembers)
     
     def load(self):
         with open("dividends.json") as divs:
@@ -70,6 +75,28 @@ class Dividends():
 
         return dividends, prices
 
+    def members(self):
+        # initialize dict with all members
+        allMembers = {}
+        for holo in self.currentPrices:
+            allMembers[holo] = []
+        for div in self.histDividends:
+            for holo in self.histDividends[div]:
+                try:
+                    allMembers[holo].append(self.histDividends[div][holo])
+                except KeyError:
+                    pass
+        return allMembers
+
+    def dates(self):
+        allDates = []
+        for date in self.histDividends:
+            allDates.append(date)
+        return allDates
+
+    def trends(self):
+        self.__getTrends()
+
 def getURL(url, session=""):
     success = False
     while not success:
@@ -107,5 +134,6 @@ if __name__ == '__main__':
     ratios = sortRatios(calc, descending=True)
     for holo in ratios:
         print(holo + ": " + "%.3f" % ratios[holo])
+    #divs.trends()
     
     
