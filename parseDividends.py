@@ -4,6 +4,13 @@ import matplotlib.pyplot
 
 if __name__ == '__main__':
     divs = optimalDividends.Dividends()
+    COLOR = "#666666"
+    matplotlib.rcParams['text.color'] = COLOR
+    matplotlib.rcParams['axes.labelcolor'] = COLOR
+    matplotlib.rcParams['xtick.color'] = COLOR
+    matplotlib.rcParams['ytick.color'] = COLOR
+    matplotlib.rc('font', family='Arial')
+    
     fig, ax = matplotlib.pyplot.subplots()
     matplotlib.pyplot.grid(color="#29282c")
     fig.patch.set_facecolor('#2e2d31')
