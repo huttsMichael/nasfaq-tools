@@ -133,5 +133,5 @@ dmypy.json
 
 # BEGIN REPO SPECIFIC IGNORES
 *leaderboard.json
-bk_*
+bk*_*
 dividends_*
