@@ -33,7 +33,10 @@ for capture_index, capture_timestamp in enumerate(leaderboard_data):
     else:
         step += 1
 
+print(f"dumping to file")
 with open(REDUCED_NAME, 'w') as leaderboard_reduced_file:
     json.dump(leaderboard_reduced, leaderboard_reduced_file)
+
+print(f"all done!")
 
 
