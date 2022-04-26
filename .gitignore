@@ -132,6 +132,6 @@ dmypy.json
 .vscode/
 
 # BEGIN REPO SPECIFIC IGNORES
-*leaderboard.json
+*leaderboard*.json
 bk*_*
 dividends_*
