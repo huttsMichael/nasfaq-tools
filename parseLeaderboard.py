@@ -1,5 +1,5 @@
 import argparse
-import json
+import ujson
 import matplotlib
 import matplotlib.pyplot
 import datetime
@@ -55,7 +55,7 @@ with open(dest_file, 'a') as outfile:
 
 print("loading json")
 with open(dest_file) as f:
-    leaderboard = json.load(f)
+    leaderboard = ujson.load(f)
 
 if TOP_USERS:
     print("getting users from", USER_LOWER_RANGE, "to", USER_UPPER_RANGE)
